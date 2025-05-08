@@ -23,6 +23,15 @@
                     :message="form.errors.password"
                     placeholder="Enter your password"
                 ></TextInput>
+
+                <div className="flex items-center gap-2">
+                    <input
+                        type="checkbox"
+                        v-model="form.remember"
+                        id="remember"
+                    />
+                    <label for="remember">Remember me</label>
+                </div>
                 <button
                     type="submit"
                     :disabled="form.processing"
@@ -30,13 +39,12 @@
                 >
                     Login
                 </button>
-
                 <p class="text-center text-slate-600 mt-4">
                     Need an account?
                     <a
                         :href="route('register')"
                         class="text-blue-500 hover:underline"
-                        >Login</a
+                        >Register</a
                     >
                 </p>
             </form>
@@ -51,12 +59,13 @@ import TextInput from "@/Components/TextInput.vue";
 const form = useForm({
     email: null,
     password: null,
+    remember: null,
 });
 
 const submit = () => {
     form.post(route("login"), {
         onError: () => {
-            form.reset("password");
+            form.reset("password, remember");
         },
     });
 };
