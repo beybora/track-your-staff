@@ -24,7 +24,7 @@
                     placeholder="Enter your password"
                 ></TextInput>
 
-                <div className="flex items-center gap-2">
+                <div class="flex items-center gap-2">
                     <input
                         type="checkbox"
                         v-model="form.remember"
