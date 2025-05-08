@@ -6,56 +6,37 @@
 
         <div class="w-full max-w-lg bg-white p-8 rounded shadow-md">
             <form @submit.prevent="submit">
-                <div class="mb-6">
-                    <label class="block text-gray-700 font-semibold mb-2"
-                        >Name</label
-                    >
-                    <input
-                        type="text"
-                        class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
-                        placeholder="Enter your name"
-                        v-model="form.name"
-                    />
-                    <small>{{ form.errors.name }}</small>
-                </div>
+                <TextInput
+                    name="name"
+                    type="text"
+                    v-model="form.name"
+                    :message="form.errors.name"
+                    placeholder="Enter your name"
+                ></TextInput>
 
-                <div class="mb-6">
-                    <label class="block text-gray-700 font-semibold mb-2"
-                        >E-Mail</label
-                    >
-                    <input
-                        type="text"
-                        class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
-                        placeholder="Enter your email"
-                        v-model="form.email"
-                    />
-                    <small>{{ form.errors.email }}</small>
-                </div>
+                <TextInput
+                    name="email"
+                    type="text"
+                    v-model="form.email"
+                    :message="form.errors.email"
+                    placeholder="Enter your email"
+                ></TextInput>
 
-                <div class="mb-6">
-                    <label class="block text-gray-700 font-semibold mb-2"
-                        >Password</label
-                    >
-                    <input
-                        type="password"
-                        class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
-                        placeholder="Enter your password"
-                        v-model="form.password"
-                    />
-                    <small>{{ form.errors.password }}</small>
-                </div>
+                <TextInput
+                    name="password"
+                    type="password"
+                    v-model="form.password"
+                    :message="form.errors.password"
+                    placeholder="Enter your password"
+                ></TextInput>
 
-                <div class="mb-6">
-                    <label class="block text-gray-700 font-semibold mb-2"
-                        >Confirm Password</label
-                    >
-                    <input
-                        type="password"
-                        class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
-                        placeholder="Confirm your password"
-                        v-model="form.password_confirmation"
-                    />
-                </div>
+                <TextInput
+                    name="confirm password"
+                    type="password"
+                    v-model="form.password_confirmation"
+                    :message="form.errors.password_confirmation"
+                    placeholder="Confirm your password"
+                ></TextInput>
 
                 <button
                     type="submit"
@@ -73,8 +54,10 @@
         </div>
     </div>
 </template>
+
 <script setup>
 import { useForm } from "@inertiajs/vue3";
+import TextInput from "@/Components/TextInput.vue";
 
 const form = useForm({
     name: null,
@@ -83,7 +66,7 @@ const form = useForm({
     password_confirmation: null,
 });
 
-const submit = (e) => {
+const submit = () => {
     form.post(route("register"), {
         onError: () => {
             form.reset("password", "password_confirmation");
