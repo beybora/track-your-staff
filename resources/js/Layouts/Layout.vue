@@ -6,10 +6,11 @@
                     <h1>{{ title }}</h1>
                     <Link :href="route('home')">Home</Link>
                     <Link :href="route('about')">About</Link>
+                    <Link :href="route('register')">Register</Link>
                 </div>
             </nav>
         </header>
-        <main class="p-4 max-w-screen-2xl">
+        <main class="p-2 max-w-screen-2xl mx-auto">
             <slot></slot>
         </main>
     </div>
