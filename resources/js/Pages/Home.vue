@@ -1,5 +1,5 @@
 <template>
-    <Head :title="`${$page.component}`" />
+    <Head :title="`${$page.component} - `" />
     <h1>Welcome to the Home Page</h1>
 </template>
 
