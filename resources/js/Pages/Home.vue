@@ -1,6 +1,11 @@
 <template>
     <Head :title="`${$page.component} - `" />
     <div>
+        <div class="flex justify-end mb-4">
+            <div class="w-1/4">
+                <input type="search" placeholder="Search" v-model="search" />
+            </div>
+        </div>
         <table class="w-full border-collapse bg-white rounded shadow-md">
             <thead>
                 <tr class="bg-slate-300">
@@ -21,7 +26,6 @@
         </table>
 
         <div>
-            <!-- Pagination Links -->
             <div>
                 <Link
                     v-for="link in users.links"
@@ -37,7 +41,6 @@
                 ></Link>
             </div>
 
-            <!-- Pagination Info -->
             <p class="text-slate-600 text-sm">
                 Showing {{ users.from }} to {{ users.to }} of
                 {{ users.total }} results
@@ -47,11 +50,22 @@
 </template>
 
 <script setup>
-import { Link } from "@inertiajs/vue3";
+import { Link, router } from "@inertiajs/vue3";
+import { ref, watch } from "vue";
+import { debounce } from "lodash";
 
-defineProps({
+const props = defineProps({
     users: Object,
+    searchTerm: String,
 });
+const search = ref(props.searchTerm);
+
+watch(
+    search,
+    debounce((q) => {
+        router.get("/", { search: q }, { preserveState: true });
+    }, 500)
+);
 
 const getDate = (date) =>
     new Date(date).toLocaleDateString("en-us", {

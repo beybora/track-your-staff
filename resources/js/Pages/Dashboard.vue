@@ -1,8 +1,6 @@
 <template>
     <div>
-        <h1 class="text-3xl font-bold mb-6 text-center">
-            Welcome back {{ $page.props.auth.user.name }}
-        </h1>
+        <h1 class="text-3xl font-bold mb-6 text-center">Welcome back</h1>
     </div>
 </template>
 
