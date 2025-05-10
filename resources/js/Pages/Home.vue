@@ -12,6 +12,7 @@
                     <th class="p-4 text-left">Name</th>
                     <th class="p-4 text-left">Email</th>
                     <th class="p-4 text-left">Registration Date</th>
+                    <th v-if="can.delete_user" class="p-4 text-left">Delete</th>
                 </tr>
             </thead>
             <tbody>
@@ -20,6 +21,11 @@
                     <td class="p-4 text-left">{{ user.email }}</td>
                     <td class="p-4 text-left">
                         {{ getDate(user.created_at) }}
+                    </td>
+                    <td class="p-4" v-if="can.delete_user">
+                        <button
+                            class="w-4 h-4 bg-red-500 rounded-full cursor-pointer"
+                        ></button>
                     </td>
                 </tr>
             </tbody>
@@ -57,6 +63,7 @@ import { debounce } from "lodash";
 const props = defineProps({
     users: Object,
     searchTerm: String,
+    can: Object,
 });
 const search = ref(props.searchTerm);
 
